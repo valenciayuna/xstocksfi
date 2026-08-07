@@ -1,563 +1,1453 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nama Kamu | Portfolio</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-scroll-behavior:smooth;
-font-family:'Inter',sans-serif;
-}
-
-body{
-
-background:#050816;
-color:white;
-overflow-x:hidden;
-
-}
-
-body::before{
-
-content:"";
-position:fixed;
-width:700px;
-height:700px;
-background:radial-gradient(circle,#4f46e555,transparent 70%);
-left:-250px;
-top:-200px;
-z-index:-2;
-
-}
-
-body::after{
-
-content:"";
-position:fixed;
-width:700px;
-height:700px;
-background:radial-gradient(circle,#06b6d455,transparent 70%);
-right:-250px;
-bottom:-200px;
-z-index:-2;
-
-}
-
-.progress{
-
-position:fixed;
-top:0;
-left:0;
-height:4px;
-width:0%;
-background:linear-gradient(90deg,#6366f1,#06b6d4);
-z-index:9999;
-
-}
-
-nav{
-
-position:fixed;
-top:0;
-left:0;
-width:100%;
-padding:18px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(20px);
-border-bottom:1px solid rgba(255,255,255,.1);
-z-index:999;
-
-}
-
-.logo{
-
-font-size:28px;
-font-weight:800;
-background:linear-gradient(90deg,#6366f1,#06b6d4);
--webkit-background-clip:text;
-color:transparent;
-
-}
-
-nav ul{
-
-display:flex;
-list-style:none;
-gap:30px;
-
-}
-
-nav ul li a{
-
-color:white;
-text-decoration:none;
-transition:.3s;
-
-}
-
-nav ul li a:hover{
-
-color:#06b6d4;
-
-}
-
-.hero{
-
-min-height:100vh;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
-align-items:center;
-padding:120px 8%;
-
-}
-
-.hero h3{
-
-font-size:22px;
-color:#94a3b8;
-margin-bottom:10px;
-
-}
-
-.hero h1{
-
-font-size:60px;
-line-height:1.1;
-margin-bottom:15px;
-
-}
-
-.typing{
-
-font-size:26px;
-font-weight:600;
-color:#06b6d4;
-margin-bottom:20px;
-
-}
-
-.hero p{
-
-color:#cbd5e1;
-line-height:1.8;
-max-width:600px;
-
-}
-
-.btns{
-
-margin-top:40px;
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-
-}
-
-.btn{
-
-padding:15px 28px;
-border-radius:50px;
-text-decoration:none;
-font-weight:600;
-transition:.4s;
-
-}
-
-.primary{
-
-background:linear-gradient(90deg,#6366f1,#06b6d4);
-color:white;
-
-}
-
-.secondary{
-
-border:1px solid #555;
-color:white;
-
-}
-
-.btn:hover{
-
-transform:translateY(-5px);
-
-}
-
-.profile{
-
-display:flex;
-justify-content:center;
-
-}
-
-.profile img{
-
-width:360px;
-height:360px;
-border-radius:50%;
-object-fit:cover;
-border:5px solid rgba(255,255,255,.15);
-animation:float 5s ease infinite;
-
-}
-
-@keyframes float{
-
-0%,100%{
-
-transform:translateY(0);
-
-}
-
-50%{
-
-transform:translateY(-18px);
-
-}
-
-}
-
-section{
-
-padding:100px 8%;
-
-}
-
-.title{
-
-font-size:42px;
-margin-bottom:50px;
-text-align:center;
-
-}
-
-.about{
-
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:50px;
-
-}
-
-.glass{
-
-background:rgba(255,255,255,.05);
-padding:30px;
-border-radius:25px;
-border:1px solid rgba(255,255,255,.1);
-backdrop-filter:blur(20px);
-
-}
-
-.about p{
-
-line-height:1.9;
-color:#d1d5db;
-
-}
-
-.info div{
-
-margin:18px 0;
-
-}
-
-.skills{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-
-}
-
-.skill{
-
-padding:25px;
-border-radius:20px;
-background:rgba(255,255,255,.05);
-
-}
-
-.skill h4{
-
-margin-bottom:15px;
-
-}
-
-.bar{
-
-height:10px;
-background:#1e293b;
-border-radius:20px;
-overflow:hidden;
-
-}
-
-.fill{
-
-height:100%;
-background:linear-gradient(90deg,#6366f1,#06b6d4);
-width:0%;
-
-}
-
-.timeline{
-
-border-left:2px solid #4f46e5;
-padding-left:35px;
-
-}
-
-.item{
-
-margin-bottom:50px;
-position:relative;
-
-}
-
-.item::before{
-
-content:"";
-position:absolute;
-width:18px;
-height:18px;
-background:#06b6d4;
-border-radius:50%;
-left:-45px;
-top:6px;
-
-}
-
-.projects{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:30px;
-
-}
-
-.card{
-
-background:rgba(255,255,255,.05);
-border-radius:20px;
-overflow:hidden;
-transition:.4s;
-
-}
-
-.card:hover{
-
-transform:translateY(-10px);
-
-}
-
-.card img{
-
-width:100%;
-
-}
-
-.card-content{
-
-padding:25px;
-
-}
-
-.contact{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:40px;
-
-}
-
-input,
-textarea{
-
-width:100%;
-padding:15px;
-margin-bottom:15px;
-border:none;
-border-radius:15px;
-background:#111827;
-color:white;
-
-}
-
-button{
-
-padding:15px 25px;
-border:none;
-border-radius:50px;
-background:linear-gradient(90deg,#6366f1,#06b6d4);
-color:white;
-cursor:pointer;
-
-}
-
-.social{
-
-margin-top:20px;
-display:flex;
-gap:20px;
-font-size:28px;
-
-}
-
-.social a{
-
-color:white;
-transition:.3s;
-
-}
-
-.social a:hover{
-
-color:#06b6d4;
-
-}
-
-footer{
-
-padding:40px;
-text-align:center;
-color:#94a3b8;
-
-}
-
-.top{
-
-position:fixed;
-bottom:30px;
-right:30px;
-width:50px;
-height:50px;
-border-radius:50%;
-background:#06b6d4;
-display:flex;
-justify-content:center;
-align-items:center;
-cursor:pointer;
-display:none;
-
-}
-
-.reveal{
-
-opacity:0;
-transform:translateY(40px);
-transition:1s;
-
-}
-
-.reveal.active{
-
-opacity:1;
-transform:translateY(0);
-
-}
-
-@media(max-width:900px){
-
-.hero h1{
-
-font-size:45px;
-
-}
-
-.about{
-
-grid-template-columns:1fr;
-
-}
-
-nav ul{
-
-display:none;
-
-}
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio & Resume Modern</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. CSS VARIABLES & RESET
+           ========================================================================== */
+        :root {
+            --bg-base: #090d16;
+            --bg-card: rgba(18, 26, 43, 0.6);
+            --bg-card-hover: rgba(28, 40, 65, 0.8);
+            --border-glow: rgba(99, 102, 241, 0.25);
+            --border-glow-active: rgba(168, 85, 247, 0.5);
+            
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+
+            --primary: #6366f1;   /* Indigo */
+            --secondary: #a855f7; /* Purple */
+            --accent: #06b6d4;    /* Cyan */
+
+            --grad-primary: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
+            --grad-surface: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+
+            --blur-glass: blur(16px);
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-base); }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        /* ==========================================================================
+           2. ANIMATED BACKGROUND & CURSOR GLOW
+           ========================================================================== */
+        #cursor-glow {
+            position: fixed;
+            top: 0; left: 0;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(168, 85, 247, 0.05) 40%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            transition: transform 0.08s ease-out;
+        }
+
+        canvas#particle-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Ambient background mesh */
+        .ambient-mesh {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .mesh-blob {
+            position: absolute;
+            filter: blur(120px);
+            opacity: 0.25;
+            border-radius: 50%;
+            animation: blobFloat 20s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
+        }
+        .mesh-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--primary); }
+        .mesh-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: var(--secondary); animation-delay: -5s; }
+        .mesh-3 { top: 40%; left: 30%; width: 35vw; height: 35vw; background: var(--accent); animation-delay: -10s; }
+
+        @keyframes blobFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10%, 15%) scale(1.1); }
+        }
+
+        /* Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            background: var(--grad-primary);
+            z-index: 9999;
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+
+        /* ==========================================================================
+           3. LOADING SCREEN
+           ========================================================================== */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-base);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.6s ease, visibility 0.6s;
+        }
+        .spinner {
+            width: 50px; height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--primary);
+            border-right-color: var(--secondary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ==========================================================================
+           4. LAYOUT & UI COMPONENTS
+           ========================================================================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-subtitle {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(180deg, #ffffff 0%, #9ca3af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glassmorphism Card Universal */
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+        }
+        .glass-card:hover {
+            border-color: var(--border-glow-active);
+            box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Buttons & Ripple Effect */
+        .btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            overflow: hidden;
+            border: none;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+            z-index: 1;
+        }
+        .btn-primary {
+            background: var(--grad-primary);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: var(--blur-glass);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-effect 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes ripple-effect {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* Gradient Text Helper */
+        .text-gradient {
+            background: var(--grad-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ==========================================================================
+           5. NAVBAR
+           ========================================================================== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1.25rem 0;
+            transition: padding 0.3s ease, background 0.3s ease, border 0.3s ease;
+        }
+        .navbar.scrolled {
+            padding: 0.75rem 0;
+            background: rgba(9, 13, 22, 0.75);
+            backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: #fff;
+            letter-spacing: -0.03em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-main);
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px; left: 0; width: 100%; height: 2px;
+            background: var(--grad-primary);
+            border-radius: 2px;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+           6. HERO SECTION
+           ========================================================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+        }
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+        .hero-text h2 {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            height: 2rem;
+        }
+        .hero-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Profile Image Floating Animation */
+        .hero-avatar-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .avatar-glow {
+            position: absolute;
+            width: 320px; height: 320px;
+            background: var(--grad-primary);
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0.4;
+            animation: pulseGlow 4s infinite alternate ease-in-out;
+        }
+        .avatar-img {
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes pulseGlow {
+            0% { opacity: 0.3; transform: scale(0.95); }
+            100% { opacity: 0.6; transform: scale(1.05); }
+        }
+
+        /* ==========================================================================
+           7. ABOUT SECTION & STATS
+           ========================================================================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 2rem;
+        }
+        .about-info-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .info-label {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .info-value {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           8. SKILLS SECTION
+           ========================================================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .skill-card {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .skill-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .skill-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .skill-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        .skill-name {
+            font-weight: 600;
+        }
+        .skill-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            background: var(--grad-primary);
+            border-radius: 99px;
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.1, 0.5, 0.1, 1);
+        }
+
+        /* ==========================================================================
+           9. EXPERIENCE & EDUCATION (TIMELINE)
+           ========================================================================== */
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 20px; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 50%, transparent 100%);
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2.5rem;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 11px; top: 5px;
+            width: 20px; height: 20px;
+            background: var(--bg-base);
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: 0 0 10px var(--accent);
+        }
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .timeline-company {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        /* ==========================================================================
+           10. PROJECTS SECTION
+           ========================================================================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .project-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .project-card:hover .project-img {
+            transform: scale(1.08);
+        }
+        .project-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .project-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+            flex-grow: 1;
+        }
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+        }
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: var(--accent);
+        }
+        .project-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* ==========================================================================
+           11. CERTIFICATES SECTION
+           ========================================================================== */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .cert-card {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+        .cert-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+            background: rgba(168, 85, 247, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+        }
+        .cert-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        .cert-issuer {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           12. CONTACT SECTION
+           ========================================================================== */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .social-btn {
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+        .social-btn:hover {
+            background: var(--grad-primary);
+            border-color: transparent;
+            transform: translateY(-3px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition-fast);
+        }
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+        }
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* ==========================================================================
+           13. FOOTER & BACK TO TOP
+           ========================================================================== */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        #back-to-top {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: var(--grad-primary);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-fast);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ==========================================================================
+           14. SCROLL REVEAL ANIMATIONS
+           ========================================================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================================================
+           15. RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .hero-content, .about-grid, .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .hero-text { text-align: center; }
+            .hero-text p { margin: 0 auto 2rem auto; }
+            .hero-actions { justify-content: center; }
+            .hero { padding-top: 8rem; }
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 2rem; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .avatar-img { width: 220px; height: 220px; }
+            .avatar-glow { width: 240px; height: 240px; }
+            
+            .mobile-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                width: 75%; height: 100vh;
+                background: rgba(9, 13, 22, 0.95);
+                backdrop-filter: var(--blur-glass);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.4s ease;
+            }
+            .nav-links.active { right: 0; }
+            .about-info-list { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="progress"></div>
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
 
-<nav>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
 
-<div class="logo">MYCV</div>
+    <!-- Interactive Glowing Cursor Light -->
+    <div id="cursor-glow"></div>
 
-<ul>
+    <!-- Dynamic Animated Canvas Particles -->
+    <canvas id="particle-canvas"></canvas>
 
-<li><a href="#home">Home</a></li>
-<li><a href="#about">About</a></li>
-<li><a href="#skills">Skills</a></li>
-<li><a href="#experience">Experience</a></li>
-<li><a href="#projects">Projects</a></li>
-<li><a href="#contact">Contact</a></li>
+    <!-- Ambient Gradient Blobs -->
+    <div class="ambient-mesh">
+        <div class="mesh-blob mesh-1"></div>
+        <div class="mesh-blob mesh-2"></div>
+        <div class="mesh-blob mesh-3"></div>
+    </div>
 
-</ul>
+    <!-- Back To Top Button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid => fa-arrow-up"></i>
+    </button>
 
-</nav>
+    <!-- ==========================================================================
+       NAVBAR
+       ========================================================================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">Dev<span class="text-gradient">Portfolio.</span></a>
+            <button class="mobile-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">Tentang</a></li>
+                <li><a href="#skills" class="nav-link">Skill</a></li>
+                <li><a href="#experience" class="nav-link">Pengalaman</a></li>
+                <li><a href="#projects" class="nav-link">Project</a></li>
+                <li><a href="#contact" class="nav-link">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<section class="hero" id="home">
+    <!-- ==========================================================================
+       1. HERO SECTION
+       ========================================================================== -->
+    <section id="hero" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text reveal">
+                <h1>Halo, Saya <br><span class="text-gradient">Ahmad Nauval</span></h1>
+                <h2><span id="typewriter"></span></h2>
+                <p>Mengembangkan aplikasi web performa tinggi dengan fokus pada arsitektur modern, UI/UX premium, dan kode yang bersih.</p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">Hubungi Saya <i class="fa-solid fa-paper-plane"></i></a>
+                    <a href="#" class="btn btn-secondary">Download CV <i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+            <div class="hero-avatar-wrapper reveal">
+                <div class="avatar-glow"></div>
+                <!-- Tempatkan link Foto Profil Anda di bawah ini -->
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Foto Profil" class="avatar-img">
+            </div>
+        </div>
+    </section>
 
-<div>
+    <!-- ==========================================================================
+       2. TENTANG SAYA & STATS
+       ========================================================================== -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Mengenal Lebih Dekat</span>
+                <h2 class="section-title">Tentang Saya</h2>
+            </div>
+            <div class="about-grid">
+                <div class="glass-card tilt-card reveal">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Pengembang Web & Desainer Digital</h3>
+                    <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
+                        Saya adalah Full-Stack Developer yang berfokus pada ekosistem web modern. Memiliki passion tinggi dalam merancang antarmuka yang bersih serta membangun backend yang tangguh dan terintegrasi.
+                    </p>
+                    <div class="about-info-list">
+                        <div class="info-item">
+                            <span class="info-label">Umur</span>
+                            <span class="info-value">24 Tahun</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Lokasi</span>
+                            <span class="info-value">Jakarta, Indonesia</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Email</span>
+                            <span class="info-value">nauval@example.com</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Status</span>
+                            <span class="info-value text-gradient">Open for Hire</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="glass-card stat-card tilt-card reveal">
+                        <span class="stat-number text-gradient counter" data-target="3">0</span>
+                        <span class="stat-label">Tahun Pengalaman</span>
+                    </div>
+                    <div class="glass-card stat-card tilt-card reveal">
+                        <span class="stat-number text-gradient counter" data-target="25">0</span>
+                        <span class="stat-label">Project Selesai</span>
+                    </div>
+                    <div class="glass-card stat-card tilt-card reveal">
+                        <span class="stat-number text-gradient counter" data-target="12">0</span>
+                        <span class="stat-label">Klien Puas</span>
+                    </div>
+                    <div class="glass-card stat-card tilt-card reveal">
+                        <span class="stat-number text-gradient counter" data-target="5">0</span>
+                        <span class="stat-label">Sertifikasi Teknis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h3>Hello, I'm</h3>
+    <!-- ==========================================================================
+       3. SKILL SECTION
+       ========================================================================== -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Keahlian Teknis</span>
+                <h2 class="section-title">Teknologi & Tools</h2>
+            </div>
+            <div class="skills-grid">
+                <!-- Skill Item -->
+                <div class="glass-card skill-card tilt-card reveal">
+                    <div class="skill-header">
+                        <div class="skill-info">
+                            <i class="fa-brands fa-html5 skill-icon"></i>
+                            <span class="skill-name">HTML / CSS</span>
+                        </div>
+                        <span class="skill-percent">95%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-progress="95%"></div>
+                    </div>
+                </div>
 
-<h1>Nama Kamu</h1>
+                <div class="glass-card skill-card tilt-card reveal">
+                    <div class="skill-header">
+                        <div class="skill-info">
+                            <i class="fa-brands fa-js skill-icon"></i>
+                            <span class="skill-name">JavaScript (ES6+)</span>
+                        </div>
+                        <span class="skill-percent">90%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-progress="90%"></div>
+                    </div>
+                </div>
 
-<div class="typing"></div>
+                <div class="glass-card skill-card tilt-card reveal">
+                    <div class="skill-header">
+                        <div class="skill-info">
+                            <i class="fa-brands fa-php skill-icon"></i>
+                            <span class="skill-name">PHP</span>
+                        </div>
+                        <span class="skill-percent">85%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-progress="85%"></div>
+                    </div>
+                </div>
 
-<p>
+                <div class="glass-card skill-card tilt-card reveal">
+                    <div class="skill-header">
+                        <div class="skill-info">
+                            <i class="fa-brands fa-laravel skill-icon"></i>
+                            <span class="skill-name">Laravel</span>
+                        </div>
+                        <span class="skill-percent">80%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-progress="80%"></div>
+                    </div>
+                </div>
 
-Isi deskripsi singkat tentang diri kamu di sini.
-Ceritakan siapa kamu, apa passion kamu,
-dan apa yang sedang kamu pelajari.
+                <div class="glass-card skill-card tilt-card reveal">
+                    <div class="skill-header">
+                        <div class="skill-info">
+                            <i class="fa-solid fa-database skill-icon"></i>
+                            <span class="skill-name">MySQL</span>
+                        </div>
+                        <span class="skill-percent">85%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-progress="85%"></div>
+                    </div>
+                </div>
 
-</p>
+                <div class="glass-card skill-card tilt-card reveal">
+                    <div class="skill-header">
+                        <div class="skill-info">
+                            <i class="fa-solid fa-figma skill-icon"></i>
+                            <span class="skill-name">UI/UX Design</span>
+                        </div>
+                        <span class="skill-percent">75%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-progress="75%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="btns">
+    <!-- ==========================================================================
+       4. PENGALAMAN & PENDIDIKAN
+       ========================================================================== -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Rekam Jejak</span>
+                <h2 class="section-title">Pengalaman & Pendidikan</h2>
+            </div>
+            
+            <div class="timeline-container">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card tilt-card">
+                        <span class="timeline-date">2024 - Sekarang</span>
+                        <h3 class="timeline-title">Senior Full Stack Developer</h3>
+                        <div class="timeline-company">Tech Innovators Studio</div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Memimpin pengembangan aplikasi berbasis SaaS, mengoptimalkan arsitektur database, dan mengimplementasikan desain UI/UX berbasis standar industri modern.</p>
+                    </div>
+                </div>
 
-<a href="#" class="btn primary">
-Download CV
-</a>
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card tilt-card">
+                        <span class="timeline-date">2022 - 2024</span>
+                        <h3 class="timeline-title">Frontend Engineer</h3>
+                        <div class="timeline-company">Digital Media Agency</div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Membangun landing page interaktif dengan performa tinggi dan animasi halus untuk berbagai klien korporat global.</p>
+                    </div>
+                </div>
 
-<a href="#contact" class="btn secondary">
-Hubungi Saya
-</a>
+                <!-- Timeline Item 3 (Pendidikan) -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card tilt-card">
+                        <span class="timeline-date">2018 - 2022</span>
+                        <h3 class="timeline-title">S1 Teknik Informatika</h3>
+                        <div class="timeline-company">Universitas Teknologi Digital</div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Lulus dengan predikat Cum Laude. Fokus studi pada Rekayasa Perangkat Lunak dan Pemrosesan Data.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</div>
+    <!-- ==========================================================================
+       5. PROJECT SECTION
+       ========================================================================== -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Portofolio</span>
+                <h2 class="section-title">Project Pilihan</h2>
+            </div>
+            <div class="projects-grid">
+                <!-- Project Card 1 -->
+                <div class="glass-card project-card tilt-card reveal">
+                    <div class="project-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="SaaS Dashboard" class="project-img">
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Fintech Analytics Dashboard</h3>
+                        <p class="project-desc">Platform pemantauan keuangan real-time dengan grafik interaktif dan integrasi payment gateway.</p>
+                        <div class="project-tags">
+                            <span class="tag">Laravel</span>
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-primary btn-sm">Demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="#" class="btn btn-secondary btn-sm"><i class="fa-brands fa-github"></i> Source</a>
+                        </div>
+                    </div>
+                </div>
 
-</div>
+                <!-- Project Card 2 -->
+                <div class="glass-card project-card tilt-card reveal">
+                    <div class="project-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=600&q=80" alt="E-Commerce App" class="project-img">
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Modern E-Commerce Store</h3>
+                        <p class="project-desc">Aplikasi toko online responsif dengan fitur filter dinamis, keranjang belanja, dan manajemen pesanan.</p>
+                        <div class="project-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">PHP</span>
+                            <span class="tag">Tailwind</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-primary btn-sm">Demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="#" class="btn btn-secondary btn-sm"><i class="fa-brands fa-github"></i> Source</a>
+                        </div>
+                    </div>
+                </div>
 
-<div class="profile">
+                <!-- Project Card 3 -->
+                <div class="glass-card project-card tilt-card reveal">
+                    <div class="project-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="AI Workspace" class="project-img">
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">AI Content Generator UI</h3>
+                        <p class="project-desc">Eksplorasi antarmuka berbasis AI menggunakan стек web modern dan animasi Micro-interaction.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML/CSS</span>
+                            <span class="tag">JS ES6</span>
+                            <span class="tag">UI/UX</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-primary btn-sm">Demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="#" class="btn btn-secondary btn-sm"><i class="fa-brands fa-github"></i> Source</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<img src="https://via.placeholder.com/500"
-alt="Profile">
+    <!-- ==========================================================================
+       6. SERTIFIKAT SECTION
+       ========================================================================== -->
+    <section id="certificates">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Pencapaian</span>
+                <h2 class="section-title">Sertifikasi</h2>
+            </div>
+            <div class="cert-grid">
+                <div class="glass-card cert-card tilt-card reveal">
+                    <i class="fa-solid fa-certificate cert-icon"></i>
+                    <div>
+                        <h3 class="cert-title">Full Stack Web Development</h3>
+                        <span class="cert-issuer">Google / Coursera • 2023</span>
+                    </div>
+                </div>
+                <div class="glass-card cert-card tilt-card reveal">
+                    <i class="fa-solid fa-award cert-icon"></i>
+                    <div>
+                        <h3 class="cert-title">Laravel Expert Developer</h3>
+                        <span class="cert-issuer">Sertifikasi Nasional • 2024</span>
+                    </div>
+                </div>
+                <div class="glass-card cert-card tilt-card reveal">
+                    <i class="fa-solid fa-code cert-icon"></i>
+                    <div>
+                        <h3 class="cert-title">UI/UX Professional Certificate</h3>
+                        <span class="cert-issuer">Figma Institute • 2022</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</div>
+    <!-- ==========================================================================
+       7. KONTAK SECTION
+       ========================================================================== -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Mari Berkolaborasi</span>
+                <h2 class="section-title">Hubungi Saya</h2>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info reveal">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Mulai Proyek Bersama</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Tertarik untuk membangun sesuatu yang hebat? Kirimkan pesan dan mari diskusikan ide Anda.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn" aria-label="Github"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                    </div>
+                </div>
+                <form class="glass-card contact-form reveal" onsubmit="event.preventDefault(); alert('Pesan Anda berhasil dikirim!');">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Nama Lengkap" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Alamat Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Pesan Anda" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Kirim Pesan <i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-</section>
+    <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+    <footer>
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">&copy; 2026 Ahmad Nauval. All rights reserved.</p>
+            <p style="font-size: 0.8rem; color: var(--text-dim);">"Designed with modern elegance and precision code."</p>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+       JAVASCRIPT SYSTEM (INTERNAL)
+       ========================================================================== -->
+    <script>
+        /* --- 1. Loader --- */
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.visibility = 'hidden', 600);
+        });
+
+        /* --- 2. Scroll Progress & Navbar Scrolled --- */
+        const navbar = document.getElementById('navbar');
+        const progressBar = document.getElementById('scroll-progress');
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            const totalScroll = document.documentElement.scrollTop;
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (totalScroll / windowHeight) * 100;
+            progressBar.style.width = scrollPercent + '%';
+
+            if (totalScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            if (totalScroll > 400) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* --- 3. Cursor Glow Movement --- */
+        const cursorGlow = document.getElementById('cursor-glow');
+        window.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        /* --- 4. Mobile Navigation Toggle --- */
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        /* --- 5. Typewriter Effect --- */
+        const phrases = ["Full Stack Developer", "UI/UX Enthusiast", "Web Architect"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById('typewriter');
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            if (isDeleting) {
+                typewriterEl.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterEl.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typeSpeed = 2000; // Pause at end
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+        document.addEventListener('DOMContentLoaded', type);
+
+        /* --- 6. Scroll Reveal & Active Nav Link --- */
+        const reveals = document.querySelectorAll('.reveal');
+        const sections = document.querySelectorAll('section');
+        const navLinksList = document.querySelectorAll('.nav-link');
+
+        function revealOnScroll() {
+            const windowHeight = window.innerHeight;
+            reveals.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('active');
+                    
+                    // Trigger Skill Bar Animations
+                    const skillBars = el.querySelectorAll('.skill-bar-fill');
+                    skillBars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-progress');
+                    });
+
+                    // Trigger Counters
+                    const counters = el.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        if (!counter.classList.contains('counted')) {
+                            counter.classList.add('counted');
+                            const target = +counter.getAttribute('data-target');
+                            let count = 0;
+                            const speed = target / 30;
+                            const updateCount = () => {
+                                count += speed;
+                                if (count < target) {
+                                    counter.innerText = Math.ceil(count);
+                                    setTimeout(updateCount, 40);
+                                } else {
+                                    counter.innerText = target + "+";
+                                }
+                            };
+                            updateCount();
+                        }
+                    });
+                }
+            });
+
+            // Update Active Nav
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinksList.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        /* --- 7. Button Ripple Effect --- */
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                let x = e.clientX - e.target.getBoundingClientRect().left;
+                let y = e.clientY - e.target.getBoundingClientRect().top;
+                let ripples = document.createElement('span');
+                ripples.className = 'ripple';
+                ripples.style.left = x + 'px';
+                ripples.style.top = y + 'px';
+                this.appendChild(ripples);
+                setTimeout(() => ripples.remove(), 600);
+            });
+        });
+
+        /* --- 8. Card Tilt Effect (3D Light Effect) --- */
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+            });
+        });
+
+        /* --- 9. Dynamic Canvas Particles Background --- */
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(168, 85, 247, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.floor(window.innerWidth / 15);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
+</body>
+</html>
