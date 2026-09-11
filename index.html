@@ -1,1827 +1,519 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ahmad Nauval Badali | Web Developer & Crypto Enthusiast</title>
-  
-  <!-- Google Fonts: Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome Icons CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>xStocks × Pump.fun — Custom Pairs</title>
+  <meta name="description" content="A visual explainer for xStocks, tokenized equities, and Pump.fun Custom Pairs." />
   <style>
-    /* ==========================================================================
-       1. VARIABLES & BASE STYLES
-       ========================================================================== */
     :root {
-      --bg-dark: #080b11;
-      --bg-card: rgba(18, 24, 38, 0.65);
-      --bg-card-hover: rgba(26, 35, 56, 0.85);
-      --border-color: rgba(255, 255, 255, 0.08);
-      --border-color-hover: rgba(56, 189, 248, 0.3);
-      
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
-      --text-dim: #6b7280;
-      
-      --primary-cyan: #06b6d4;
-      --primary-purple: #8b5cf6;
-      --primary-indigo: #6366f1;
-      
-      --gradient-accent: linear-gradient(135deg, #06b6d4, #8b5cf6);
-      --gradient-text: linear-gradient(135deg, #38bdf8, #a855f7, #ec4899);
-      --glow-shadow: 0 0 25px rgba(6, 182, 212, 0.15);
-      
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-full: 9999px;
-      
-      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --bg: #050505;
+      --panel: #0d0d0f;
+      --panel2: #131316;
+      --text: #f5f5f5;
+      --muted: #9b9ba3;
+      --line: #26262b;
+      --green: #79f2a3;
+      --purple: #a78bfa;
+      --yellow: #f7df73;
+      --red: #ff7b7b;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-main);
+      margin: 0;
+      background:
+        radial-gradient(circle at 80% 0%, rgba(167,139,250,.12), transparent 30%),
+        radial-gradient(circle at 10% 20%, rgba(121,242,163,.08), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.6;
-      overflow-x: hidden;
-      position: relative;
     }
 
-    /* Scrollbar Custom */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg-dark);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1e293b;
-      border-radius: var(--radius-full);
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary-purple);
-    }
+    a { color: inherit; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: auto; }
 
-    /* Selection */
-    ::selection {
-      background: rgba(139, 92, 246, 0.3);
-      color: #fff;
-    }
-
-    /* Utility Classes */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .gradient-text {
-      background: var(--gradient-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .section-title {
-      font-size: 2.25rem;
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 0.75rem;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 3.5rem auto;
-      font-size: 1rem;
-    }
-
-    section {
-      padding: 6rem 0;
-      position: relative;
-    }
-
-    /* ==========================================================================
-       2. AMBIENT BACKGROUND & CURSOR GLOW
-       ========================================================================== */
-    #particle-canvas {
-      position: fixed;
+    nav {
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      pointer-events: none;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(5,5,5,.78);
+      border-bottom: 1px solid rgba(255,255,255,.07);
     }
 
-    .cursor-glow {
-      position: fixed;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(6, 182, 212, 0.05) 40%, transparent 70%);
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      z-index: -1;
-      transition: transform 0.1s ease-out;
-    }
-
-    /* Ambient Glow Blobs */
-    .glow-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      z-index: -2;
-      opacity: 0.35;
-      pointer-events: none;
-    }
-    .glow-1 {
-      top: 10%;
-      left: -10%;
-      width: 500px;
-      height: 500px;
-      background: var(--primary-cyan);
-    }
-    .glow-2 {
-      top: 40%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      background: var(--primary-purple);
-    }
-
-    /* ==========================================================================
-       3. NAVIGATION BAR & PROGRESS BAR
-       ========================================================================== */
-    .scroll-progress-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: transparent;
-      z-index: 1001;
-    }
-    .scroll-progress-bar {
-      height: 100%;
-      background: var(--gradient-accent);
-      width: 0%;
-      transition: width 0.1s ease-out;
-    }
-
-    .navbar {
-      position: fixed;
-      top: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 1100px;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-full);
-      padding: 0.85rem 1.75rem;
+    nav .inner {
+      height: 68px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      z-index: 1000;
-      transition: var(--transition-smooth);
+      justify-content: space-between;
     }
 
-    .nav-logo {
-      font-weight: 800;
-      font-size: 1.2rem;
-      color: var(--text-main);
-      text-decoration: none;
-      letter-spacing: -0.5px;
-    }
-    .nav-logo span {
-      color: var(--primary-cyan);
-    }
+    .brand { font-weight: 800; letter-spacing: -.04em; }
+    .brand span { color: var(--green); }
 
-    .nav-links {
+    .navlinks {
       display: flex;
-      gap: 2rem;
-      list-style: none;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
     }
 
-    .nav-link {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: var(--transition-smooth);
-      position: relative;
-    }
+    .navlinks a { text-decoration: none; }
+    .navlinks a:hover { color: white; }
 
-    .nav-link:hover, .nav-link.active {
-      color: var(--text-main);
-    }
-
-    .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--gradient-accent);
-      border-radius: var(--radius-full);
-    }
-
-    .nav-btn {
-      padding: 0.5rem 1.25rem;
-      border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: var(--transition-smooth);
-    }
-
-    .nav-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: var(--primary-cyan);
-    }
-
-    /* Mobile Toggle */
-    .menu-toggle {
-      display: none;
-      color: var(--text-main);
-      font-size: 1.25rem;
-      cursor: pointer;
-    }
-
-    /* ==========================================================================
-       4. HERO SECTION
-       ========================================================================== */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 8rem;
-    }
-
-    .hero-container {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.4rem 1rem;
-      border-radius: var(--radius-full);
-      background: rgba(6, 182, 212, 0.1);
-      border: 1px solid rgba(6, 182, 212, 0.25);
-      color: var(--primary-cyan);
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-    }
-    .hero-badge .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--primary-cyan);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--primary-cyan);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(0.95); opacity: 0.8; }
-      50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px var(--primary-cyan); }
-      100% { transform: scale(0.95); opacity: 0.8; }
-    }
-
-    .hero-title {
-      font-size: 3.5rem;
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -1px;
-      margin-bottom: 1rem;
-    }
-
-    .hero-subtitle {
-      font-size: 1.35rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      font-weight: 500;
-      height: 2rem;
-    }
-
-    .typed-cursor {
-      color: var(--primary-cyan);
-      animation: blink 0.7s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    .hero-description {
-      font-size: 1.05rem;
-      color: var(--text-dim);
-      margin-bottom: 2.5rem;
-      max-width: 540px;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    /* Ripple Effect Button Base */
-    .btn {
-      position: relative;
-      overflow: hidden;
-      padding: 0.85rem 1.8rem;
-      border-radius: var(--radius-full);
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      transition: var(--transition-smooth);
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--gradient-accent);
-      color: #fff;
-      box-shadow: var(--glow-shadow);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 35px rgba(6, 182, 212, 0.35);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-    }
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--border-color-hover);
-      transform: translateY(-2px);
-    }
-
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.35);
-      transform: scale(0);
-      animation: ripple-animation 0.6s linear;
-      pointer-events: none;
-    }
-
-    @keyframes ripple-animation {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
-
-    /* Hero Avatar Wrapper */
-    .hero-avatar-wrapper {
-      position: relative;
-      display: flex;
-      justify-content: center;
-    }
-
-    .avatar-glow {
-      position: absolute;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: var(--gradient-accent);
-      filter: blur(50px);
-      opacity: 0.25;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .avatar-frame {
-      position: relative;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      padding: 6px;
-      background: var(--gradient-accent);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .avatar-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      background: #0f172a;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-
-    /* ==========================================================================
-       5. ABOUT SECTION & STATS
-       ========================================================================== */
-    .glass-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      transition: var(--transition-smooth);
-    }
-    .glass-card:hover {
-      border-color: var(--border-color-hover);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    .about-text p {
-      color: var(--text-muted);
-      margin-bottom: 1.2rem;
-      font-size: 1rem;
-    }
-
-    .quick-info-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .info-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--text-main);
-      font-size: 0.9rem;
-    }
-
-    .info-item i {
-      color: var(--primary-cyan);
-    }
-
-    .stats-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
-    }
-
-    .stat-card {
+      padding: 105px 0 90px;
       text-align: center;
-      padding: 1.75rem 1rem;
     }
 
-    .stat-number {
-      font-size: 2.75rem;
-      font-weight: 800;
-      color: var(--text-main);
-      margin-bottom: 0.25rem;
-      display: block;
-    }
-
-    .stat-label {
-      font-size: 0.85rem;
-      color: var(--text-dim);
+    .eyebrow {
+      display: inline-flex;
+      border: 1px solid #303034;
+      background: rgba(255,255,255,.03);
+      padding: 7px 12px;
+      border-radius: 999px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 600;
     }
 
-    /* ==========================================================================
-       6. SKILL MATRIX
-       ========================================================================== */
-    .skills-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
+    h1 {
+      font-size: clamp(48px, 8vw, 92px);
+      line-height: .95;
+      letter-spacing: -.065em;
+      margin: 24px auto;
+      max-width: 950px;
     }
 
-    .tab-btn {
-      padding: 0.6rem 1.4rem;
-      border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-color);
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition-smooth);
+    .gradient {
+      background: linear-gradient(90deg, var(--green), var(--purple), var(--yellow));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .tab-btn.active, .tab-btn:hover {
-      background: var(--gradient-accent);
-      color: #fff;
-      border-color: transparent;
-      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.2);
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .skill-card {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .skill-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .skill-name {
-      font-weight: 600;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .skill-name i {
-      color: var(--primary-cyan);
-    }
-
-    .skill-percent {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .progress-bar-bg {
-      height: 6px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-full);
-      overflow: hidden;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: var(--gradient-accent);
-      border-radius: var(--radius-full);
-      width: 0%;
-      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* ==========================================================================
-       7. TIMELINE (EXPERIENCE & EDUCATION)
-       ========================================================================== */
-    .timeline-container {
-      position: relative;
-      max-width: 800px;
+    .hero p {
+      max-width: 720px;
       margin: 0 auto;
+      color: var(--muted);
+      font-size: 19px;
     }
 
-    .timeline-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 20px;
-      height: 100%;
-      width: 2px;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-left: 60px;
-      margin-bottom: 2.5rem;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: 12px;
-      top: 5px;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--bg-dark);
-      border: 3px solid var(--primary-cyan);
-      box-shadow: 0 0 10px var(--primary-cyan);
-      transition: var(--transition-smooth);
-    }
-
-    .timeline-item:hover .timeline-dot {
-      background: var(--primary-purple);
-      border-color: #fff;
-      transform: scale(1.2);
-    }
-
-    .timeline-date {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--primary-cyan);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.25rem;
-    }
-
-    .timeline-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-
-    .timeline-company {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 0.75rem;
-    }
-
-    .timeline-desc {
-      font-size: 0.9rem;
-      color: var(--text-dim);
-    }
-
-    /* ==========================================================================
-       8. PORTFOLIO PROJECTS
-       ========================================================================== */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 2rem;
-    }
-
-    .project-card {
-      overflow: hidden;
-      padding: 0;
+    .buttons {
+      margin-top: 30px;
       display: flex;
-      flex-direction: column;
-      transform-style: preserve-3d;
-      perspective: 1000px;
-    }
-
-    .project-img-wrapper {
-      position: relative;
-      width: 100%;
-      height: 200px;
-      overflow: hidden;
-    }
-
-    .project-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .project-card:hover .project-img {
-      transform: scale(1.05);
-    }
-
-    .project-content {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .project-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .project-desc {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 1.25rem;
-      flex-grow: 1;
-    }
-
-    .project-tags {
-      display: flex;
+      justify-content: center;
+      gap: 12px;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
     }
 
-    .tag {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--primary-cyan);
-      font-weight: 600;
-      border: 1px solid rgba(6, 182, 212, 0.15);
-    }
-
-    .project-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .project-link {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-main);
+    .btn {
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: var(--transition-smooth);
-    }
-
-    .project-link:hover {
-      color: var(--primary-cyan);
-    }
-
-    /* ==========================================================================
-       9. CERTIFICATIONS & ACHIEVEMENTS
-       ========================================================================== */
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .cert-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1.25rem;
-    }
-
-    .cert-icon {
-      font-size: 1.75rem;
-      color: var(--primary-purple);
-      background: rgba(139, 92, 246, 0.1);
-      padding: 0.75rem;
-      border-radius: var(--radius-md);
-      flex-shrink: 0;
-    }
-
-    .cert-info h4 {
-      font-size: 1rem;
+      border: 1px solid var(--line);
+      background: white;
+      color: #080808;
+      padding: 12px 18px;
+      border-radius: 12px;
       font-weight: 700;
-      margin-bottom: 0.25rem;
+      font-size: 14px;
     }
 
-    .cert-info p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    .btn.secondary {
+      background: #111113;
+      color: white;
     }
 
-    /* ==========================================================================
-       10. CONTACT SECTION
-       ========================================================================== */
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 2.5rem;
-    }
-
-    .contact-info-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .contact-details {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    .contact-detail-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .contact-icon {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: rgba(6, 182, 212, 0.1);
-      color: var(--primary-cyan);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      border: 1px solid rgba(6, 182, 212, 0.2);
-    }
-
-    .contact-text label {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--text-dim);
+    section { padding: 85px 0; }
+    .section-label {
+      color: var(--green);
+      font-size: 12px;
       text-transform: uppercase;
-      font-weight: 600;
+      letter-spacing: .14em;
+      font-weight: 800;
     }
 
-    .contact-text span {
-      font-size: 0.95rem;
-      font-weight: 600;
+    h2 {
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1;
+      letter-spacing: -.05em;
+      margin: 12px 0 18px;
     }
 
-    .social-links {
-      display: flex;
-      gap: 0.75rem;
+    .lead {
+      max-width: 730px;
+      color: var(--muted);
+      font-size: 17px;
     }
 
-    .social-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 35px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, var(--panel2), var(--panel));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 25px;
+    }
+
+    .card .icon {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 { margin: 0 0 8px; font-size: 21px; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .mechanic {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 35px;
+    }
+
+    .flow {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 30px;
+      background: var(--panel);
+    }
+
+    .flow-title {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .pair {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .asset {
+      padding: 10px 14px;
+      border: 1px solid #34343a;
+      border-radius: 12px;
+      background: #151519;
+    }
+
+    .arrow { color: var(--muted); }
+
+    .highlight {
+      border-color: rgba(121,242,163,.35);
+      box-shadow: inset 0 0 60px rgba(121,242,163,.035);
+    }
+
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .ticker {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      border-radius: 16px;
+    }
+
+    .ticker strong { font-size: 20px; }
+    .ticker small { display: block; color: var(--muted); margin-top: 3px; }
+
+    .big-idea {
+      margin-top: 35px;
+      padding: 45px;
+      border: 1px solid #33333a;
+      border-radius: 28px;
+      background:
+        linear-gradient(135deg, rgba(121,242,163,.06), rgba(167,139,250,.06)),
+        var(--panel);
+    }
+
+    .big-idea blockquote {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.1;
+      letter-spacing: -.04em;
+      font-weight: 800;
+    }
+
+    .risk {
+      border-left: 3px solid var(--red);
+      padding-left: 18px;
+      margin-top: 25px;
+      color: var(--muted);
+    }
+
+    .sources {
+      display: grid;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .source {
+      border: 1px solid var(--line);
+      padding: 15px 18px;
+      border-radius: 12px;
+      background: var(--panel);
       text-decoration: none;
-      transition: var(--transition-smooth);
     }
 
-    .social-btn:hover {
-      background: var(--gradient-accent);
-      border-color: transparent;
-      transform: translateY(-3px);
-      box-shadow: var(--glow-shadow);
-    }
+    .source:hover { border-color: #55555e; }
 
-    /* Form Styling */
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--text-muted);
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 0.85rem 1rem;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      color: var(--text-main);
-      font-family: inherit;
-      font-size: 0.95rem;
-      transition: var(--transition-smooth);
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--primary-cyan);
-      background: rgba(255, 255, 255, 0.05);
-      box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
-    }
-
-    textarea.form-control {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    /* ==========================================================================
-       11. FOOTER & BACK TO TOP
-       ========================================================================== */
     footer {
-      padding: 2.5rem 0;
-      border-top: 1px solid var(--border-color);
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 0.85rem;
+      border-top: 1px solid var(--line);
+      padding: 35px 0 60px;
+      color: var(--muted);
+      font-size: 13px;
     }
 
-    .back-to-top {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: var(--gradient-accent);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      opacity: 0;
-      visibility: hidden;
-      transition: var(--transition-smooth);
-      z-index: 99;
-      box-shadow: var(--glow-shadow);
+    @media (max-width: 800px) {
+      .navlinks { display: none; }
+      .grid, .mechanic { grid-template-columns: 1fr; }
+      .example-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero { padding-top: 75px; }
     }
 
-    .back-to-top.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .back-to-top:hover {
-      transform: translateY(-4px);
-    }
-
-    /* Scroll Reveal Animation base */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ==========================================================================
-       12. RESPONSIVE DESIGN (MOBILE & TABLET)
-       ========================================================================== */
-    @media (max-width: 992px) {
-      .hero-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .hero-title {
-        font-size: 2.75rem;
-      }
-
-      .hero-description {
-        margin: 0 auto 2rem auto;
-      }
-
-      .hero-cta {
-        justify-content: center;
-      }
-
-      .about-grid, .contact-wrapper {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-avatar-wrapper {
-        order: -1;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba(15, 23, 42, 0.95);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        padding: 1.5rem;
-        border-radius: var(--radius-lg);
-        border: 1px solid var(--border-color);
-        margin-top: 0.5rem;
-        display: none;
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      .quick-info-list {
-        grid-template-columns: 1fr;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-title {
-        font-size: 2.25rem;
-      }
+    @media (max-width: 480px) {
+      .container { width: min(100% - 28px, 1120px); }
+      section { padding: 65px 0; }
+      .example-grid { grid-template-columns: 1fr 1fr; }
+      .big-idea { padding: 28px; }
     }
   </style>
 </head>
+
 <body>
-
-  <!-- Ambient Cursor Glow & Particles -->
-  <div class="cursor-glow" id="cursor-glow"></div>
-  <canvas id="particle-canvas"></canvas>
-
-  <!-- Glow Blobs Background -->
-  <div class="glow-blob glow-1"></div>
-  <div class="glow-blob glow-2"></div>
-
-  <!-- Scroll Progress Bar -->
-  <div class="scroll-progress-container">
-    <div class="scroll-progress-bar" id="progress-bar"></div>
-  </div>
-
-  <!-- Sticky Glassmorphism Navbar -->
-  <nav class="navbar">
-    <a href="#hero" class="nav-logo">Ahmad<span>.dev</span></a>
-    
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#about" class="nav-link">Tentang</a></li>
-      <li><a href="#skills" class="nav-link">Keahlian</a></li>
-      <li><a href="#experience" class="nav-link">Pengalaman</a></li>
-      <li><a href="#projects" class="nav-link">Portofolio</a></li>
-      <li><a href="#contact" class="nav-link">Kontak</a></li>
-    </ul>
-
-    <a href="#contact" class="nav-btn btn-ripple">Hire Me</a>
-
-    <div class="menu-toggle" id="menu-toggle">
-      <i class="fa-solid fa-bars"></i>
+  <nav>
+    <div class="container inner">
+      <div class="brand">xStocks <span>×</span> Pump.fun</div>
+      <div class="navlinks">
+        <a href="#xstocks">xStocks</a>
+        <a href="#custom-pairs">Custom Pairs</a>
+        <a href="#why">Why it matters</a>
+        <a href="#risks">Risks</a>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="container hero-container">
-      <div class="hero-content reveal">
-        <div class="hero-badge">
-          <span class="pulse-dot"></span> Siap Menerima Proyek Baru
-        </div>
-        <h1 class="hero-title">Halo, Saya <br><span class="gradient-text">Ahmad Nauval B.</span></h1>
-        <div class="hero-subtitle">
-          Saya seorang <span id="typed-text"></span><span class="typed-cursor">|</span>
-        </div>
-        <p class="hero-description">
-          Mengembangkan aplikasi web modern berkinerja tinggi, berorientasi pada pengalaman pengguna yang elegan, serta aktif dalam ekosistem teknologi Web3 dan Kripto.
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">Onchain equities meet permissionless markets</div>
+        <h1>What if a memecoin could trade against <span class="gradient">Tesla?</span></h1>
+        <p>
+          xStocks brings tokenized equities and ETFs onchain. Pump.fun Custom Pairs
+          opens a new design space where those assets can become trading pairs.
         </p>
-        <div class="hero-cta">
-          <a href="#contact" class="btn btn-primary btn-ripple">
-            <i class="fa-solid fa-paper-plane"></i> Hubungi Saya
-          </a>
-          <a href="#" class="btn btn-secondary btn-ripple" onclick="alert('Silakan ganti link ini dengan file CV Anda!'); return false;">
-            <i class="fa-solid fa-download"></i> Unduh CV
-          </a>
+        <div class="buttons">
+          <a class="btn" href="#custom-pairs">See how it works</a>
+          <a class="btn secondary" href="#why">Why this matters</a>
         </div>
       </div>
+    </section>
 
-      <div class="hero-avatar-wrapper reveal">
-        <div class="avatar-glow"></div>
-        <div class="avatar-frame">
-          <!-- Placeholder Avatar (Dapat diganti dengan foto Anda) -->
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Ahmad Nauval Badali" class="avatar-img">
-        </div>
-      </div>
-    </div>
-  </section>
+    <section id="xstocks">
+      <div class="container">
+        <div class="section-label">01 — xStocks</div>
+        <h2>Stocks, but composable onchain.</h2>
+        <p class="lead">
+          xStocks are tokenized representations of traditional stocks and ETFs.
+          The important shift is not simply putting a stock into a wallet—it is
+          making that asset transferable and usable inside crypto-native infrastructure,
+          subject to the applicable product and jurisdictional restrictions.
+        </p>
 
-  <!-- About Section -->
-  <section id="about">
-    <div class="container">
-      <h2 class="section-title reveal">Tentang <span class="gradient-text">Saya</span></h2>
-      <p class="section-subtitle reveal">Mengenal latar belakang, komitmen kerja, dan statistik pencapaian profesional saya.</p>
-
-      <div class="about-grid">
-        <div class="glass-card about-text reveal">
-          <h3 style="font-size: 1.4rem; margin-bottom: 1rem;">Membangun Solusi Digital dengan Presisi & Kinerja Tinggi</h3>
-          <p>
-            Saya adalah seorang Software Developer yang berdedikasi menciptakan pengalaman digital yang bersih, responsif, dan intuitif. Berfokus pada teknologi web modern, saya menggabungkan estetika desain yang rapi dengan struktur kode yang efisien.
-          </p>
-          <p>
-            Selain fokus pada pengembangan Front-End dan Web, saya juga aktif mendalami perkembangan Web3, ekosistem Kripto, dan integrasi API yang kompleks.
-          </p>
-
-          <div class="quick-info-list">
-            <div class="info-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <span>Kalimantan Selatan, ID</span>
-            </div>
-            <div class="info-item">
-              <i class="fa-solid fa-briefcase"></i>
-              <span>Status: Available</span>
-            </div>
-            <div class="info-item">
-              <i class="fa-solid fa-envelope"></i>
-              <span>ahmad.nauval@example.com</span>
-            </div>
-            <div class="info-item">
-              <i class="fa-solid fa-graduation-cap"></i>
-              <span>Teknik Informatika</span>
-            </div>
+        <div class="grid">
+          <div class="card">
+            <div class="icon">🏦</div>
+            <h3>Tokenized exposure</h3>
+            <p>Traditional financial assets can be represented as blockchain tokens backed by the corresponding underlying assets.</p>
           </div>
-        </div>
-
-        <div class="stats-container reveal">
-          <div class="glass-card stat-card">
-            <span class="stat-number" data-target="3">0</span>
-            <span class="stat-label">Tahun Pengalaman</span>
+          <div class="card">
+            <div class="icon">⛓️</div>
+            <h3>Onchain</h3>
+            <p>Users can interact with tokenized assets through blockchain wallets and decentralized infrastructure.</p>
           </div>
-          <div class="glass-card stat-card">
-            <span class="stat-number" data-target="24">0</span>
-            <span class="stat-label">Proyek Selesai</span>
-          </div>
-          <div class="glass-card stat-card">
-            <span class="stat-number" data-target="15">0</span>
-            <span class="stat-label">Klien & Mitra</span>
-          </div>
-          <div class="glass-card stat-card">
-            <span class="stat-number" data-target="99">0</span>
-            <span class="stat-label">% Kepuasan Klien</span>
+          <div class="card">
+            <div class="icon">🧩</div>
+            <h3>Composable</h3>
+            <p>The interesting part: tokenized assets can potentially become building blocks inside other onchain markets.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Interactive Skill Matrix -->
-  <section id="skills">
-    <div class="container">
-      <h2 class="section-title reveal">Keahlian <span class="gradient-text">Teknis</span></h2>
-      <p class="section-subtitle reveal">Teknologi dan tools yang biasa saya gunakan dalam membangun produk digital.</p>
+    <section id="custom-pairs">
+      <div class="container">
+        <div class="section-label">02 — Custom Pairs</div>
+        <h2>The pair is the story.</h2>
+        <p class="lead">
+          Historically, a crypto token might launch against an asset such as SOL.
+          Custom Pairs changes the design space by allowing supported assets to be
+          used as the other side of a market.
+        </p>
 
-      <div class="skills-tabs reveal">
-        <button class="tab-btn active" data-filter="all">Semua</button>
-        <button class="tab-btn" data-filter="frontend">Frontend</button>
-        <button class="tab-btn" data-filter="backend">Backend & DB</button>
-        <button class="tab-btn" data-filter="tools">Tools & Web3</button>
+        <div class="mechanic">
+          <div class="flow">
+            <div class="flow-title">Traditional crypto market</div>
+            <div class="pair">
+              <span class="asset">MEME</span>
+              <span class="arrow">↔</span>
+              <span class="asset">SOL</span>
+            </div>
+            <p class="lead">The meme token's market is priced against a crypto-native asset.</p>
+          </div>
+
+          <div class="flow highlight">
+            <div class="flow-title">Custom Pair concept</div>
+            <div class="pair">
+              <span class="asset">MEME</span>
+              <span class="arrow">↔</span>
+              <span class="asset">TSLAx</span>
+            </div>
+            <p class="lead">A tokenized equity can become the quote/base asset for an onchain market.</p>
+          </div>
+        </div>
+
+        <div class="big-idea">
+          <blockquote>
+            The interesting question isn't “Can stocks go onchain?”
+            <br /><br />
+            It's “What can we build <span class="gradient">with stocks</span> once they're onchain?”
+          </blockquote>
+        </div>
       </div>
+    </section>
 
-      <div class="skills-grid">
-        <!-- HTML/CSS -->
-        <div class="glass-card skill-card reveal" data-category="frontend">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-brands fa-html5"></i> HTML5 & CSS3 / Modern Layout</span>
-            <span class="skill-percent">95%</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" data-progress="95%"></div>
-          </div>
+    <section id="why">
+      <div class="container">
+        <div class="section-label">03 — Why it matters</div>
+        <h2>From “tokenized stock” to “liquidity asset.”</h2>
+        <p class="lead">
+          If supported xStocks can be used as trading pairs, they stop being merely
+          assets people hold. They can become inputs into entirely new market structures.
+        </p>
+
+        <div class="example-grid">
+          <div class="ticker"><strong>TSLAx</strong><small>Tesla exposure</small></div>
+          <div class="ticker"><strong>NVDAx</strong><small>NVIDIA exposure</small></div>
+          <div class="ticker"><strong>SPYx</strong><small>S&P 500 ETF exposure</small></div>
+          <div class="ticker"><strong>COINx</strong><small>Coinbase exposure</small></div>
         </div>
 
-        <!-- JavaScript -->
-        <div class="glass-card skill-card reveal" data-category="frontend">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-brands fa-js"></i> Vanilla JavaScript (ES6+)</span>
-            <span class="skill-percent">90%</span>
+        <div class="grid">
+          <div class="card">
+            <div class="icon">🌐</div>
+            <h3>TradFi × DeFi</h3>
+            <p>Tokenized financial assets can participate in infrastructure originally designed for crypto assets.</p>
           </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" data-progress="90%"></div>
+          <div class="card">
+            <div class="icon">💧</div>
+            <h3>New liquidity routes</h3>
+            <p>Markets can be denominated in assets beyond SOL and stablecoins, creating new ways to express value.</p>
           </div>
-        </div>
-
-        <!-- PHP & Laravel -->
-        <div class="glass-card skill-card reveal" data-category="backend">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-brands fa-php"></i> PHP / Laravel</span>
-            <span class="skill-percent">82%</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" data-progress="82%"></div>
-          </div>
-        </div>
-
-        <!-- MySQL / Database -->
-        <div class="glass-card skill-card reveal" data-category="backend">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-solid fa-database"></i> MySQL & Relational DB</span>
-            <span class="skill-percent">85%</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" data-progress="85%"></div>
-          </div>
-        </div>
-
-        <!-- Git & GitHub -->
-        <div class="glass-card skill-card reveal" data-category="tools">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-brands fa-git-alt"></i> Git & Version Control</span>
-            <span class="skill-percent">88%</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" data-progress="88%"></div>
-          </div>
-        </div>
-
-        <!-- UI/UX & Figma -->
-        <div class="glass-card skill-card reveal" data-category="frontend">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-brands fa-figma"></i> UI/UX Design (Figma)</span>
-            <span class="skill-percent">78%</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" data-progress="78%"></div>
-          </div>
-        </div>
-
-        <!-- Web3 / Crypto Integrations -->
-        <div class="glass-card skill-card reveal" data-category="tools">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-brands fa-ethereum"></i> Web3 & Wallet Integration</span>
-            <span class="skill-percent">75%</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" data-progress="75%"></div>
-          </div>
-        </div>
-
-        <!-- REST API -->
-        <div class="glass-card skill-card reveal" data-category="backend">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-solid fa-network-wired"></i> RESTful API Architecture</span>
-            <span class="skill-percent">88%</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" data-progress="88%"></div>
+          <div class="card">
+            <div class="icon">🚀</div>
+            <h3>Permissionless experimentation</h3>
+            <p>Creators can experiment with markets and token launches using a much broader set of assets.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Timeline (Experience & Education) -->
-  <section id="experience">
-    <div class="container">
-      <h2 class="section-title reveal">Pengalaman & <span class="gradient-text">Edukasi</span></h2>
-      <p class="section-subtitle reveal">Jejak langkah profesional dan latar belakang akademik saya.</p>
+    <section>
+      <div class="container">
+        <div class="section-label">04 — The bigger picture</div>
+        <h2>Is the launchpad becoming a market primitive?</h2>
+        <p class="lead">
+          Custom Pairs point toward a broader idea: instead of every new token being
+          denominated against the same few crypto assets, onchain markets can potentially
+          be built around a much wider universe of liquid assets.
+        </p>
 
-      <div class="timeline-container">
-        <!-- Item 1 -->
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="glass-card">
-            <span class="timeline-date">2024 - Sekarang</span>
-            <h3 class="timeline-title">Full-Stack Web Developer</h3>
-            <div class="timeline-company">Independent Contractor / Freelance</div>
-            <p class="timeline-desc">
-              Merancang dan mengimplementasikan aplikasi web kustom untuk berbagai klien. Berfokus pada arsitektur bersih, integrasi sistem pembayaran digital, dan antarmuka interaktif yang responsif.
-            </p>
-          </div>
-        </div>
-
-        <!-- Item 2 -->
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="glass-card">
-            <span class="timeline-date">2023 - 2024</span>
-            <h3 class="timeline-title">Frontend Developer & Community Contributor</h3>
-            <div class="timeline-company">Web3 & Tech Community</div>
-            <p class="timeline-desc">
-              Mengembangkan antarmuka landing page berkinerja tinggi, mengelola repositori kode, dan berpartisipasi aktif dalam pengujian ekosistem aplikasi terdesentralisasi (DApps).
-            </p>
-          </div>
-        </div>
-
-        <!-- Item 3 -->
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="glass-card">
-            <span class="timeline-date">2020 - 2024</span>
-            <h3 class="timeline-title">Sarjana Komputer / Teknik Informatika</h3>
-            <div class="timeline-company">Universitas / Perguruan Tinggi</div>
-            <p class="timeline-desc">
-              Mempelajari algoritma, rekayasa perangkat lunak, manajemen basis data, dan pemrograman berorientasi objek. Aktif dalam berbagai proyek pengembangan perangkat lunak kampus.
-            </p>
-          </div>
+        <div class="big-idea">
+          <blockquote>
+            MEME → SOL is one market.<br />
+            MEME → TSLAx is another.<br />
+            MEME → SPYx is another.
+            <br /><br />
+            The pair itself becomes part of the product.
+          </blockquote>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Portfolio Projects -->
-  <section id="projects">
-    <div class="container">
-      <h2 class="section-title reveal">Portofolio <span class="gradient-text">Proyek</span></h2>
-      <p class="section-subtitle reveal">Beberapa karya dan proyek terbaik yang pernah saya kerjakan.</p>
+    <section id="risks">
+      <div class="container">
+        <div class="section-label">05 — Don't ignore the risks</div>
+        <h2>New primitives come with new failure modes.</h2>
+        <p class="lead">
+          This is an educational overview, not financial advice. Tokenized equities
+          are not automatically identical to holding the underlying security through
+          a traditional brokerage.
+        </p>
 
-      <div class="projects-grid">
-        <!-- Project 1 -->
-        <div class="glass-card project-card tilt-card reveal">
-          <div class="project-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Analytics Dashboard" class="project-img">
+        <div class="grid">
+          <div class="card">
+            <h3>Liquidity</h3>
+            <p>Thin liquidity can create large price impact and make markets difficult to enter or exit.</p>
           </div>
-          <div class="project-content">
-            <h3 class="project-title">SaaS Analytics Dashboard</h3>
-            <p class="project-desc">Dashboard analitik real-time dengan grafik interaktif, visualisasi data, dan manajemen data pengguna.</p>
-            <div class="project-tags">
-              <span class="tag">JavaScript</span>
-              <span class="tag">CSS Grid</span>
-              <span class="tag">Chart.js</span>
-              <span class="tag">REST API</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="project-link" onclick="return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
-              <a href="#" class="project-link" onclick="return false;"><i class="fa-brands fa-github"></i> Repository</a>
-            </div>
+          <div class="card">
+            <h3>Pricing</h3>
+            <p>Onchain markets and traditional markets may operate on different schedules and reference different liquidity venues.</p>
+          </div>
+          <div class="card">
+            <h3>Regulation</h3>
+            <p>Availability, transferability and access can depend on jurisdiction, product structure and applicable restrictions.</p>
           </div>
         </div>
 
-        <!-- Project 2 -->
-        <div class="glass-card project-card tilt-card reveal">
-          <div class="project-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80" alt="Web3 Asset Tracker" class="project-img">
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Crypto & Web3 Asset Tracker</h3>
-            <p class="project-desc">Aplikasi pelacak portofolio aset kripto terintegrasi API harga langsung dan antarmuka Glassmorphism.</p>
-            <div class="project-tags">
-              <span class="tag">ES6+ JS</span>
-              <span class="tag">CoinGecko API</span>
-              <span class="tag">Web3.js</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="project-link" onclick="return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
-              <a href="#" class="project-link" onclick="return false;"><i class="fa-brands fa-github"></i> Repository</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="glass-card project-card tilt-card reveal">
-          <div class="project-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=800&q=80" alt="E-Commerce Store" class="project-img">
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Modern E-Commerce Storefront</h3>
-            <p class="project-desc">Platform toko online responsif dengan fitur keranjang belanja cepat, sistem filter produk, dan checkout.</p>
-            <div class="project-tags">
-              <span class="tag">PHP</span>
-              <span class="tag">Laravel</span>
-              <span class="tag">MySQL</span>
-              <span class="tag">Midtrans API</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="project-link" onclick="return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
-              <a href="#" class="project-link" onclick="return false;"><i class="fa-brands fa-github"></i> Repository</a>
-            </div>
-          </div>
+        <div class="risk">
+          Always verify the current product documentation, supported assets,
+          jurisdictions, backing model and exact market mechanics before treating
+          a tokenized asset as equivalent to the underlying security.
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Certifications & Achievements -->
-  <section id="certifications">
-    <div class="container">
-      <h2 class="section-title reveal">Sertifikasi & <span class="gradient-text">Pencapaian</span></h2>
-      <p class="section-subtitle reveal">Lisensi teknis dan penghargaan profesional yang diakui.</p>
+    <section>
+      <div class="container">
+        <div class="section-label">06 — Sources</div>
+        <h2>Verify the details.</h2>
+        <p class="lead">
+          Replace or expand these links with the latest official announcements and
+          documentation before publishing this page.
+        </p>
 
-      <div class="certs-grid">
-        <div class="glass-card cert-card reveal">
-          <div class="cert-icon"><i class="fa-solid fa-certificate"></i></div>
-          <div class="cert-info">
-            <h4>Full-Stack Web Development</h4>
-            <p>Dicoding Indonesia • 2023</p>
-          </div>
-        </div>
-
-        <div class="glass-card cert-card reveal">
-          <div class="cert-icon"><i class="fa-solid fa-award"></i></div>
-          <div class="cert-info">
-            <h4>JavaScript Algorithms & Data Structures</h4>
-            <p>freeCodeCamp • 2023</p>
-          </div>
-        </div>
-
-        <div class="glass-card cert-card reveal">
-          <div class="cert-icon"><i class="fa-solid fa-shield-halved"></i></div>
-          <div class="cert-info">
-            <h4>Database Design & Management SQL</h4>
-            <p>Oracle Academy • 2022</p>
-          </div>
+        <div class="sources">
+          <a class="source" href="https://xstocks.com/" target="_blank" rel="noopener">xStocks — Official website ↗</a>
+          <a class="source" href="https://pump.fun/" target="_blank" rel="noopener">Pump.fun — Official website ↗</a>
+          <a class="source" href="https://www.solana.com/" target="_blank" rel="noopener">Solana — Official website ↗</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- Contact & Form Section -->
-  <section id="contact">
-    <div class="container">
-      <h2 class="section-title reveal">Mulai <span class="gradient-text">Kolaborasi</span></h2>
-      <p class="section-subtitle reveal">Punya ide proyek menarik atau ingin mendiskusikan peluang kerja sama? Hubungi saya kapan saja.</p>
-
-      <div class="contact-wrapper">
-        <div class="glass-card contact-info-card reveal">
-          <div>
-            <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Mari Bicara</h3>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">
-              Saya selalu terbuka untuk berdiskusi tentang proyek baru, ide kreatif, atau peluang karir profesional.
-            </p>
-
-            <div class="contact-details">
-              <div class="contact-detail-item">
-                <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-                <div class="contact-text">
-                  <label>Email Direct</label>
-                  <span>ahmad.nauval@example.com</span>
-                </div>
-              </div>
-
-              <div class="contact-detail-item">
-                <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
-                <div class="contact-text">
-                  <label>Lokasi Domisili</label>
-                  <span>Kalimantan Selatan, Indonesia</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <label style="display: block; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.75rem; font-weight: 600;">TEMUKAN SAYA DI</label>
-            <div class="social-links">
-              <a href="https://github.com" target="_blank" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
-              <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-              <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-              <a href="https://x.com" target="_blank" class="social-btn" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="glass-card reveal">
-          <form id="contact-form" onsubmit="handleFormSubmit(event)">
-            <div class="form-group">
-              <label for="name">Nama Lengkap</label>
-              <input type="text" id="name" class="form-control" placeholder="Masukkan nama Anda" required>
-            </div>
-
-            <div class="form-group">
-              <label for="email">Alamat Email</label>
-              <input type="email" id="email" class="form-control" placeholder="nama@domain.com" required>
-            </div>
-
-            <div class="form-group">
-              <label for="subject">Subjek Pesan</label>
-              <input type="text" id="subject" class="form-control" placeholder="Penawaran Proyek / Diskusi Pekerjaan" required>
-            </div>
-
-            <div class="form-group">
-              <label for="message">Pesan Anda</label>
-              <textarea id="message" class="form-control" placeholder="Tuliskan detail pesan Anda di sini..." required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-ripple" style="width: 100%; justify-content: center;">
-              <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 Ahmad Nauval Badali. Built with precision, performance, and clean code.</p>
+      Built as an educational explainer for xStocks × Pump.fun Custom Pairs.
+      Verify live asset availability and mechanics against official documentation.
     </div>
   </footer>
-
-  <!-- Back To Top Button -->
-  <a href="#hero" class="back-to-top" id="back-to-top" title="Kembali ke atas">
-    <i class="fa-solid fa-arrow-up"></i>
-  </a>
-
-  <!-- ==========================================================================
-     VANILLA JAVASCRIPT LOGIC
-     ========================================================================== -->
-  <script>
-    /* ------------------------------------------------------------------------
-       1. PARTICLES CANVAS BACKGROUND
-       ------------------------------------------------------------------------ */
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-
-    let particles = [];
-    const particleCount = 45;
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    class Particle {
-      constructor() {
-        this.reset();
-      }
-
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.vy = (Math.random() - 0.5) * 0.4;
-        this.radius = Math.random() * 1.5 + 0.5;
-        this.alpha = Math.random() * 0.4 + 0.1;
-      }
-
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-          this.reset();
-        }
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(56, 189, 248, ${this.alpha})`;
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    /* ------------------------------------------------------------------------
-       2. CURSOR GLOW EFFECT
-       ------------------------------------------------------------------------ */
-    const cursorGlow = document.getElementById('cursor-glow');
-    window.addEventListener('mousemove', (e) => {
-      cursorGlow.style.left = `${e.clientX}px`;
-      cursorGlow.style.top = `${e.clientY}px`;
-    });
-
-    /* ------------------------------------------------------------------------
-       3. SCROLL PROGRESS BAR & STICKY NAVBAR ACTIVE INDICATOR
-       ------------------------------------------------------------------------ */
-    const progressBar = document.getElementById('progress-bar');
-    const backToTopBtn = document.getElementById('back-to-top');
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    window.addEventListener('scroll', () => {
-      // Progress Bar Update
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const currentScroll = window.scrollY;
-      const scrollPercentage = (currentScroll / totalScroll) * 100;
-      progressBar.style.width = `${scrollPercentage}%`;
-
-      // Back to top button visibility
-      if (currentScroll > 400) {
-        backToTopBtn.classList.add('visible');
-      } else {
-        backToTopBtn.classList.remove('visible');
-      }
-
-      // Active Nav Link Update
-      let currentSection = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 150;
-        if (currentScroll >= sectionTop) {
-          currentSection = section.getAttribute('id');
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
-          link.classList.add('active');
-        }
-      });
-
-      // Trigger Animations
-      revealOnScroll();
-    });
-
-    /* ------------------------------------------------------------------------
-       4. TYPING EFFECT FOR HERO SECTION
-       ------------------------------------------------------------------------ */
-    const typedTextElement = document.getElementById('typed-text');
-    const roles = ['Web Developer', 'Software Engineer', 'Frontend Specialist', 'Crypto Enthusiast'];
-    let roleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-
-    function typeEffect() {
-      const currentRole = roles[roleIndex];
-      
-      if (isDeleting) {
-        typedTextElement.textContent = currentRole.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typedTextElement.textContent = currentRole.substring(0, charIndex + 1);
-        charIndex++;
-      }
-
-      let typeSpeed = isDeleting ? 50 : 100;
-
-      if (!isDeleting && charIndex === currentRole.length) {
-        typeSpeed = 2000; // Pause at end
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        roleIndex = (roleIndex + 1) % roles.length;
-        typeSpeed = 500;
-      }
-
-      setTimeout(typeEffect, typeSpeed);
-    }
-    typeEffect();
-
-    /* ------------------------------------------------------------------------
-       5. SKILLS CATEGORY FILTER & ANIMATED PROGRESS BARS
-       ------------------------------------------------------------------------ */
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const skillCards = document.querySelectorAll('.skill-card');
-
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const filter = btn.getAttribute('data-filter');
-
-        skillCards.forEach(card => {
-          if (filter === 'all' || card.getAttribute('data-category') === filter) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    function animateProgressBars() {
-      const fills = document.querySelectorAll('.progress-bar-fill');
-      fills.forEach(fill => {
-        const target = fill.getAttribute('data-progress');
-        const rect = fill.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom >= 0) {
-          fill.style.width = target;
-        }
-      });
-    }
-
-    /* ------------------------------------------------------------------------
-       6. NUMBER COUNTER ANIMATION (ABOUT SECTION)
-       ------------------------------------------------------------------------ */
-    let countersTriggered = false;
-    function animateCounters() {
-      const counters = document.querySelectorAll('.stat-number');
-      const statsSection = document.querySelector('.stats-container');
-      if (!statsSection) return;
-
-      const rect = statsSection.getBoundingClientRect();
-      if (rect.top < window.innerHeight && !countersTriggered) {
-        countersTriggered = true;
-        counters.forEach(counter => {
-          const target = +counter.getAttribute('data-target');
-          let count = 0;
-          const speed = target / 30; // speed factor
-
-          const updateCount = () => {
-            count += speed;
-            if (count < target) {
-              counter.innerText = Math.ceil(count);
-              setTimeout(updateCount, 40);
-            } else {
-              counter.innerText = target + '+';
-            }
-          };
-          updateCount();
-        });
-      }
-    }
-
-    /* ------------------------------------------------------------------------
-       7. 3D TILT EFFECT ON CARDS
-       ------------------------------------------------------------------------ */
-    const tiltCards = document.querySelectorAll('.tilt-card');
-
-    tiltCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateX = (y - centerY) / 12;
-        const rotateY = (centerX - x) / 12;
-
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-      });
-    });
-
-    /* ------------------------------------------------------------------------
-       8. RIPPLE EFFECT ON BUTTONS
-       ------------------------------------------------------------------------ */
-    document.querySelectorAll('.btn-ripple').forEach(button => {
-      button.addEventListener('click', function (e) {
-        const x = e.clientX - e.target.getBoundingClientRect().left;
-        const y = e.clientY - e.target.getBoundingClientRect().top;
-
-        const ripple = document.createElement('span');
-        ripple.classList.add('ripple');
-        ripple.style.left = `${x}px`;
-        ripple.style.top = `${y}px`;
-
-        this.appendChild(ripple);
-
-        setTimeout(() => {
-          ripple.remove();
-        }, 600);
-      });
-    });
-
-    /* ------------------------------------------------------------------------
-       9. SCROLL REVEAL ANIMATION
-       ------------------------------------------------------------------------ */
-    function revealOnScroll() {
-      const reveals = document.querySelectorAll('.reveal');
-      reveals.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 100;
-
-        if (elementTop < window.innerHeight - elementVisible) {
-          element.classList.add('active');
-        }
-      });
-
-      animateProgressBars();
-      animateCounters();
-    }
-    // Run once on initial load
-    revealOnScroll();
-
-    /* ------------------------------------------------------------------------
-       10. MOBILE MENU TOGGLE
-       ------------------------------------------------------------------------ */
-    const menuToggle = document.getElementById('menu-toggle');
-    const navLinksMenu = document.getElementById('nav-links');
-
-    menuToggle.addEventListener('click', () => {
-      navLinksMenu.classList.toggle('active');
-    });
-
-    // Close mobile menu when link clicked
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navLinksMenu.classList.remove('active');
-      });
-    });
-
-    /* ------------------------------------------------------------------------
-       11. FORM SUBMIT HANDLER
-       ------------------------------------------------------------------------ */
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      alert('Pesan Anda berhasil dikirim! (Demo mode)');
-      document.getElementById('contact-form').reset();
-    }
-  </script>
 </body>
 </html>
