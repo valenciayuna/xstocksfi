@@ -69,6 +69,37 @@
       text-align: center;
     }
 
+
+    .brand-lockup {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      font-size: 22px;
+      font-weight: 800;
+      color: #777780;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border: 1px solid #303037;
+      border-radius: 13px;
+      background: #111114;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 7px;
+    }
+
     .eyebrow {
       display: inline-flex;
       border: 1px solid #303034;
@@ -164,10 +195,34 @@
       padding: 25px;
     }
 
-    .card .icon {
-      font-size: 30px;
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+      border: 1px solid #303037;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 15px;
+      background: #101013;
+      overflow: hidden;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      color: #d8d8df;
     }
+
+    .logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+    }
+
+    .chain-mark { font-size: 7px; }
+    .compose-mark { font-size: 7px; }
+    .tradfi-mark { width: 92px; font-size: 7px; }
+    .liquidity-mark { width: 76px; font-size: 7px; }
 
     .card h3 { margin: 0 0 8px; font-size: 21px; }
     .card p { margin: 0; color: var(--muted); font-size: 14px; }
@@ -314,6 +369,11 @@
   <main>
     <section class="hero">
       <div class="container">
+        <div class="brand-lockup">
+          <div class="brand-logo"><img src="https://xstocks.com/favicon.ico" alt="xStocks" /></div>
+          <span>×</span>
+          <div class="brand-logo"><img src="https://pump.fun/favicon.ico" alt="Pump.fun" /></div>
+        </div>
         <div class="eyebrow">Onchain equities meet permissionless markets</div>
         <h1>What if a memecoin could trade against <span class="gradient">Tesla?</span></h1>
         <p>
@@ -340,17 +400,17 @@
 
         <div class="grid">
           <div class="card">
-            <div class="icon">🏦</div>
+            <div class="logo-mark xstocks-logo"><img src="https://xstocks.com/favicon.ico" alt="xStocks logo" /></div>
             <h3>Tokenized exposure</h3>
             <p>Traditional financial assets can be represented as blockchain tokens backed by the corresponding underlying assets.</p>
           </div>
           <div class="card">
-            <div class="icon">⛓️</div>
+            <div class="logo-mark chain-mark">ONCHAIN</div>
             <h3>Onchain</h3>
             <p>Users can interact with tokenized assets through blockchain wallets and decentralized infrastructure.</p>
           </div>
           <div class="card">
-            <div class="icon">🧩</div>
+            <div class="logo-mark compose-mark">COMPOSE</div>
             <h3>Composable</h3>
             <p>The interesting part: tokenized assets can potentially become building blocks inside other onchain markets.</p>
           </div>
@@ -418,17 +478,17 @@
 
         <div class="grid">
           <div class="card">
-            <div class="icon">🌐</div>
+            <div class="logo-mark tradfi-mark">TRADFI × DEFI</div>
             <h3>TradFi × DeFi</h3>
             <p>Tokenized financial assets can participate in infrastructure originally designed for crypto assets.</p>
           </div>
           <div class="card">
-            <div class="icon">💧</div>
+            <div class="logo-mark liquidity-mark">LIQUIDITY</div>
             <h3>New liquidity routes</h3>
             <p>Markets can be denominated in assets beyond SOL and stablecoins, creating new ways to express value.</p>
           </div>
           <div class="card">
-            <div class="icon">🚀</div>
+            <div class="logo-mark pump-logo"><img src="https://pump.fun/favicon.ico" alt="Pump.fun logo" /></div>
             <h3>Permissionless experimentation</h3>
             <p>Creators can experiment with markets and token launches using a much broader set of assets.</p>
           </div>
@@ -511,7 +571,7 @@
 
   <footer>
     <div class="container">
-      Built as an educational explainer for xStocks × Pump.fun Custom Pairs.
+      An educational explainer for xStocks × Pump.fun Custom Pairs.
       Verify live asset availability and mechanics against official documentation.
     </div>
   </footer>
